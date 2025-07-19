@@ -6,20 +6,19 @@ import {
   TiptapVeltComments,
 } from "@veltdev/tiptap-velt-comments";
 import { StarterKit } from "@tiptap/starter-kit";
-
 import { addComment } from "@veltdev/tiptap-velt-comments";
 import { useCommentAnnotations } from "@veltdev/react";
 import { useEffect } from "react";
 import { Button } from "./ui/button";
 
 const TiptapEditor = () => {
+  // Initialize the Tiptap editor with the necessary extensions
   const editor = useEditor({
     extensions: [
       TiptapVeltComments.configure({
-        persistVeltMarks: false,
+        persistVeltMarks: false, // Adjust based on your preference
       }),
-      TiptapVeltComments,
-      StarterKit,
+      StarterKit, // Basic editor functionality (bold, italic, etc.)
     ],
     content:
       "<p className='text-lg mb-2'>Start composing your email...</p> <p className='text-sm'>Click here to start typing or drag content blocks from the sidebar</p>",
@@ -27,48 +26,45 @@ const TiptapEditor = () => {
     autofocus: true,
   });
 
-  const addCommentRequest = {
-    editor,
-    editorId: "EDITOR_ID",
-    context: {
-      storyId: "story-id",
-      storyName: "story-name",
-    },
-  };
+  // Handle comment annotations
   const annotations = useCommentAnnotations();
 
+  // Use the effect hook to render comments if there are any annotations
   useEffect(() => {
     if (editor && annotations?.length) {
       const renderCommentsRequest = {
         editor,
-        editorId: "EDITOR_ID",
+        editorId: "EDITOR_ID", // Replace with your actual editor ID
         annotations,
       };
       renderComments(renderCommentsRequest);
     }
   }, [editor, annotations]);
+
+  // Function to add a comment when the button is clicked
   const onClickComments = () => {
-    console.log("Clikc");
     if (editor) {
       addComment({
         editor: editor,
-        editorId: "Demo-q",
+        editorId: "Demo-q", // This ID should be unique to your editor instance
       });
-      console.log("Added comment");
     }
   };
+
   return (
     <div className="max-w-4xl mx-auto">
-      {/* <VeltCommentComposer itemID="container-id" /> */}
+      {/* Conditional rendering of BubbleMenu for comment actions */}
       {editor && (
         <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-         <div>
+          <div className="bubble-menu">
+            {/* Add comment button */}
             <Button variant={"outline"} onClick={onClickComments}>
               Add Comment
             </Button>
           </div>
         </BubbleMenu>
       )}
+      {/* Editor content */}
       <EditorContent
         editor={editor}
         className="w-full min-h-56 p-4 border-2 border-dashed border-gray-200 rounded-lg focus-within:border-blue-500 focus-within:bg-blue-50/50"
@@ -78,5 +74,3 @@ const TiptapEditor = () => {
 };
 
 export default TiptapEditor;
-
-
