@@ -39,7 +39,7 @@ export const EmailComposer: React.FC = () => {
       {/* Sidebar */}
       <div
         className={cn(
-          "transition-all duration-300 ease-in-out bg-white border-r border-gray-200",
+          "max-h-screen overflow-y-scroll transition-all duration-300 ease-in-out bg-white border-r border-gray-200 no-scrollbar",
           isSidebarOpen ? "w-80" : "w-0 overflow-hidden"
         )}
       >
