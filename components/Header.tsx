@@ -205,15 +205,6 @@ export const Header: React.FC<HeaderProps> = ({
             size="sm"
             className="flex items-center space-x-2"
           >
-            <Users size={16} />
-            <span>Test</span>
-          </Button>
-
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center space-x-2"
-          >
             <Save size={16} />
             <span>Save</span>
           </Button>
