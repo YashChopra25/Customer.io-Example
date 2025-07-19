@@ -1,71 +1,68 @@
 "use client";
 
 import { useEditor, EditorContent, BubbleMenu } from "@tiptap/react";
-import {
-  renderComments,
-  TiptapVeltComments,
-} from "@veltdev/tiptap-velt-comments";
-import { StarterKit } from "@tiptap/starter-kit";
-import { addComment } from "@veltdev/tiptap-velt-comments";
+import { TiptapVeltComments, renderComments, addComment } from "@veltdev/tiptap-velt-comments";
 import { useCommentAnnotations } from "@veltdev/react";
 import { useEffect } from "react";
+import { StarterKit } from "@tiptap/starter-kit";
 import { Button } from "./ui/button";
 
+const EDITOR_ID = "customer.io-example"; // ✅ Use a consistent, meaningful ID
+
 const TiptapEditor = () => {
-  // Initialize the Tiptap editor with the necessary extensions
+  // Initialize Tiptap editor
   const editor = useEditor({
     extensions: [
       TiptapVeltComments.configure({
-        persistVeltMarks: false, // Adjust based on your preference
+        persistVeltMarks: false,
       }),
-      StarterKit, // Basic editor functionality (bold, italic, etc.)
+      StarterKit,
     ],
-    content:
-      "<p className='text-lg mb-2'>Start composing your email...</p> <p className='text-sm'>Click here to start typing or drag content blocks from the sidebar</p>",
-    immediatelyRender: false,
+    content: `
+      <p class='text-lg mb-2'>Start composing your email...</p>
+      <p class='text-sm'>Click here to start typing or drag content blocks from the sidebar</p>
+    `,
     autofocus: true,
   });
 
-  // Handle comment annotations
+  // Get annotations
   const annotations = useCommentAnnotations();
 
-  // Use the effect hook to render comments if there are any annotations
+  // Render annotations when editor and annotations are both ready
   useEffect(() => {
     if (editor && annotations?.length) {
-      const renderCommentsRequest = {
+      renderComments({
         editor,
-        editorId: "EDITOR_ID", // Replace with your actual editor ID
-        annotations,
-      };
-      console.log(annotations)
-      renderComments(renderCommentsRequest);
+        editorId: EDITOR_ID,
+        commentAnnotations:annotations
+      });
     }
   }, [editor, annotations]);
 
-  // Function to add a comment when the button is clicked
+  // Add comment handler
   const onClickComments = () => {
     if (editor) {
       addComment({
-        editor: editor,
-        editorId: "EDITOR_ID", // Replace with your actual editor ID
+        editor,
+        editorId: EDITOR_ID,
       });
     }
   };
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Conditional rendering of BubbleMenu for comment actions */}
+      {/* Bubble Menu with comment button */}
       {editor && (
         <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
           <div className="bubble-menu">
-            {/* Add comment button */}
-            <Button variant={"outline"} onClick={onClickComments}>
+            <Button variant="outline" onClick={onClickComments}>
               Add Comment
             </Button>
           </div>
         </BubbleMenu>
       )}
-      {/* Editor content */}
+
+      {/* Editor Content */}
       <EditorContent
         editor={editor}
         className="w-full min-h-56 p-4 border-2 border-dashed border-gray-200 rounded-lg focus-within:border-blue-500 focus-within:bg-blue-50/50"
