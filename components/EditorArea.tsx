@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { EmailData } from './EmailComposer';
 import { Monitor, Smartphone, Tablet, Code } from 'lucide-react';
+import TiptapEditor from './TiptapEditor';
 
 interface EditorAreaProps {
   emailData: EmailData;
@@ -131,25 +132,7 @@ export const EditorArea: React.FC<EditorAreaProps> = ({
 
       <div className="flex-1 p-6">
         <div className="max-w-4xl mx-auto">
-          <div
-            className="min-h-56 p-4 border-2 border-dashed border-gray-200 rounded-lg focus-within:border-blue-500 focus-within:bg-blue-50/50"
-            contentEditable
-            onInput={(e) => {
-              const content = (e.target as HTMLDivElement).innerHTML;
-              updateEmailData({ content });
-            }}
-            suppressContentEditableWarning={true}
-            style={{ outline: 'none' }}
-          >
-            {emailData.content ? (
-              <div dangerouslySetInnerHTML={{ __html: emailData.content }} />
-            ) : (
-              <div className="text-gray-500 text-center py-12">
-                <p className="text-lg mb-2">Start composing your email...</p>
-                <p className="text-sm">Click here to start typing or drag content blocks from the sidebar</p>
-              </div>
-            )}
-          </div>
+          <TiptapEditor/>
         </div>
       </div>
     </div>

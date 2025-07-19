@@ -80,3 +80,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+.tiptap,
+.ProseMirror {
+  color: gray;
+  min-height: 320px;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}

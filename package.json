@@ -41,10 +41,13 @@
     "@tanstack/react-form": "^1.14.1",
     "@tanstack/react-query": "^5.83.0",
     "@tanstack/react-table": "^8.21.3",
+    "@tiptap/react": "^2.9.1",
+    "@tiptap/starter-kit": "^2.9.1",
     "@types/node": "20.6.2",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
-    "@veltdev/react": "^4.5.0-beta.55",
+    "@veltdev/react": "^4.1.1",
+    "@veltdev/tiptap-velt-comments": "^4.5.0-beta.14",
     "autoprefixer": "10.4.15",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -78,7 +81,6 @@
   "directories": {
     "lib": "lib"
   },
-  "devDependencies": {},
   "author": "",
   "license": "ISC",
   "description": ""
