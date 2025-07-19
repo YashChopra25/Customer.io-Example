@@ -50,7 +50,7 @@ const TiptapEditor = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="w-full mx-auto">
       {/* Bubble Menu with comment button */}
       {editor && (
         <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>

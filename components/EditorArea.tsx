@@ -131,7 +131,7 @@ export const EditorArea: React.FC<EditorAreaProps> = ({
       </div>
 
       <div className="flex-1 p-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-[70vw] mx-auto">
           <TiptapEditor/>
         </div>
       </div>
