@@ -62,7 +62,7 @@ const TiptapEditor = () => {
       {/* <VeltCommentComposer itemID="container-id" /> */}
       {editor && (
         <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-         
+         <div>
             <Button variant={"outline"} onClick={onClickComments}>
               Add Comment
             </Button>
