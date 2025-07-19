@@ -6,7 +6,6 @@ import { Sidebar } from "./Sidebar";
 import { EditorArea } from "./EditorArea";
 import { Header } from "./Header";
 import { cn } from "@/lib/utils";
-import TiptapEditor from "./TiptapEditor";
 import { useSetDocument } from "@veltdev/react";
 
 export interface EmailData {

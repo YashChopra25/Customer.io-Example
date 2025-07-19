@@ -37,6 +37,7 @@ const TiptapEditor = () => {
         editorId: "EDITOR_ID", // Replace with your actual editor ID
         annotations,
       };
+      console.log(annotations)
       renderComments(renderCommentsRequest);
     }
   }, [editor, annotations]);
@@ -46,7 +47,7 @@ const TiptapEditor = () => {
     if (editor) {
       addComment({
         editor: editor,
-        editorId: "Demo-q", // This ID should be unique to your editor instance
+        editorId: "EDITOR_ID", // Replace with your actual editor ID
       });
     }
   };
