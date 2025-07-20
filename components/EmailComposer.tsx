@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Toolbar } from "./Toolbar";
 import { Sidebar } from "./Sidebar";
 import { EditorArea } from "./EditorArea";
@@ -31,7 +31,20 @@ export const EmailComposer: React.FC = () => {
   };
   // useSetDocument("yash-customer.io-presernt", { documentName: "salary sheet" });
     useSetDocument("sheet-1", { documentName: "salary sheet" });
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)"); // lg breakpoint
 
+    const handleResize = () => {
+      setIsSidebarOpen(mediaQuery.matches); // true for large screens, false otherwise
+    };
+
+    handleResize(); // set initial state
+    mediaQuery.addEventListener("change", handleResize);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
