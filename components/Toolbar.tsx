@@ -23,13 +23,10 @@ import {
 } from 'lucide-react';
 
 interface ToolbarProps {
-  isPreviewMode: boolean;
   onFormatting: (format: string) => void;
 }
 
-export const Toolbar: React.FC<ToolbarProps> = ({ isPreviewMode, onFormatting }) => {
-  if (isPreviewMode) return null;
-
+export const Toolbar: React.FC<ToolbarProps> = ({ onFormatting }) => {
   const toolbarSections = [
     {
       name: 'History',

@@ -24,8 +24,6 @@ export const EmailComposer: React.FC = () => {
     content: "",
     template: "blank",
   });
-
-  const [isPreviewMode, setIsPreviewMode] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const updateEmailData = (updates: Partial<EmailData>) => {
@@ -59,14 +57,11 @@ export const EmailComposer: React.FC = () => {
         <Header
           emailData={emailData}
           updateEmailData={updateEmailData}
-          isPreviewMode={isPreviewMode}
-          setIsPreviewMode={setIsPreviewMode}
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
         {/* Toolbar */}
         <Toolbar
-          isPreviewMode={isPreviewMode}
           onFormatting={(format) => {
             console.log("Apply formatting:", format);
           }}
@@ -74,7 +69,6 @@ export const EmailComposer: React.FC = () => {
         <EditorArea
           emailData={emailData}
           updateEmailData={updateEmailData}
-          isPreviewMode={isPreviewMode}
         />
       </div>
     </div>

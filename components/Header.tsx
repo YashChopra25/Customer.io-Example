@@ -5,14 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Send,
-  Save,
-  Eye,
-  EyeOff,
-  Menu,
+  Save,  Menu,
   X,
-  Settings,
-  Clock,
-  Users,
   User,
   ChevronDown,
 } from "lucide-react";
@@ -31,8 +25,6 @@ import { VeltNotificationsTool } from "@veltdev/react";
 interface HeaderProps {
   emailData: EmailData;
   updateEmailData: (updates: Partial<EmailData>) => void;
-  isPreviewMode: boolean;
-  setIsPreviewMode: (preview: boolean) => void;
   isSidebarOpen: boolean;
   setIsSidebarOpen: (open: boolean) => void;
 }
@@ -43,8 +35,6 @@ import { names, userIds, useUserStore } from "@/helper/userdb";
 export const Header: React.FC<HeaderProps> = ({
   emailData,
   updateEmailData,
-  isPreviewMode,
-  setIsPreviewMode,
   isSidebarOpen,
   setIsSidebarOpen,
 }) => {
@@ -130,16 +120,6 @@ export const Header: React.FC<HeaderProps> = ({
 
         <div className="mt-auto flex items-center space-x-2">
           <VeltNotificationsTool />
-
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsPreviewMode(!isPreviewMode)}
-            className="flex items-center space-x-2"
-          >
-            {isPreviewMode ? <EyeOff size={16} /> : <Eye size={16} />}
-            <span>{isPreviewMode ? "Edit" : "Preview"}</span>
-          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button

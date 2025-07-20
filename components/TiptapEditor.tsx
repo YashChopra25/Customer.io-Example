@@ -1,7 +1,11 @@
 "use client";
 
 import { useEditor, EditorContent, BubbleMenu } from "@tiptap/react";
-import { TiptapVeltComments, renderComments, addComment } from "@veltdev/tiptap-velt-comments";
+import {
+  TiptapVeltComments,
+  renderComments,
+  addComment,
+} from "@veltdev/tiptap-velt-comments";
 import { useCommentAnnotations } from "@veltdev/react";
 import { useEffect } from "react";
 import { StarterKit } from "@tiptap/starter-kit";
@@ -19,8 +23,22 @@ const TiptapEditor = () => {
       StarterKit,
     ],
     content: `
-      <p class='text-lg mb-2'>Start composing your email...</p>
-      <p class='text-sm'>Click here to start typing or drag content blocks from the sidebar</p>
+      <div>
+        <p>Hi there,</p>
+        <p>
+          Thanks for subscribing! We're excited to have you on board. Stay tuned
+          for updates, news, and exclusive content delivered straight to your inbox.
+        </p>
+        <p>
+          In the meantime, why not check out our latest blog post?
+        </p>
+      </div>
+      <div>
+        <p>You’re receiving this email because you signed up at our website.</p>
+        <p>Unsubscribe at any time by clicking <a href="#">here</a>.</p>
+        <br>
+        <p>Cheers,<br>The Team</p>
+      </div>
     `,
     autofocus: true,
   });
@@ -34,7 +52,7 @@ const TiptapEditor = () => {
       renderComments({
         editor,
         editorId: EDITOR_ID,
-        commentAnnotations:annotations
+        commentAnnotations: annotations,
       });
     }
   }, [editor, annotations]);
