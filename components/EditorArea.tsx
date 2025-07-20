@@ -35,8 +35,8 @@ export const EditorArea: React.FC<EditorAreaProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-5 p-6">
-        <div className="max-w-[70vw] col-span-2 mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-5 p-6 space-y-6">
+        <div className="w-full lg:max-w-[70vw] col-span-2 mx-auto">
           <TiptapEditor />
         </div>
         <main className="space-y-6">

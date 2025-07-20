@@ -73,7 +73,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ onFormatting }) => {
 
   return (
     <div className="bg-white border-b border-gray-200 px-6 py-3">
-      <div className="flex items-center space-x-1">
+      <div className="flex flex-wrap items-center space-x-1">
         {toolbarSections.map((section, sectionIndex) => (
           <React.Fragment key={section.name}>
             <div className="flex items-center space-x-1">

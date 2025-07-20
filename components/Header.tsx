@@ -3,13 +3,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Send,
-  Save,  Menu,
-  X,
-  User,
-  ChevronDown,
-} from "lucide-react";
+import { Send, Save, Menu, X, User, ChevronDown } from "lucide-react";
 import { EmailData } from "./EmailComposer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -82,9 +76,11 @@ export const Header: React.FC<HeaderProps> = ({
   }, [client, user]);
 
   return (
-    <div className="bg-white border-b border-gray-200 px-6 py-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+    <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4">
+      <div className="flex flex-wrap items-center justify-between gap-y-4">
+        {/* Left side - Toggle, Subject, From */}
+        <div className="flex flex-wrap items-center gap-4">
+          {/* Sidebar Toggle */}
           <Button
             variant="ghost"
             size="sm"
@@ -94,7 +90,8 @@ export const Header: React.FC<HeaderProps> = ({
             {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </Button>
 
-          <div className="flex items-center space-x-4">
+          {/* Subject and From fields */}
+          <div className="hidden lg:flex  flex-col sm:flex-row gap-4">
             <div className="flex flex-col space-y-1">
               <label className="text-xs font-medium text-gray-700">
                 Subject
@@ -103,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({
                 value={emailData.subject}
                 onChange={(e) => updateEmailData({ subject: e.target.value })}
                 placeholder="Enter email subject..."
-                className="w-80 h-8 text-sm"
+                className="w-full sm:w-64 md:w-80 h-8 text-sm"
               />
             </div>
 
@@ -112,14 +109,17 @@ export const Header: React.FC<HeaderProps> = ({
               <Input
                 value={emailData.from}
                 onChange={(e) => updateEmailData({ from: e.target.value })}
-                className="w-60 h-8 text-sm"
+                className="w-full sm:w-48 md:w-60 h-8 text-sm"
               />
             </div>
           </div>
         </div>
 
-        <div className="mt-auto flex items-center space-x-2">
+        {/* Right side - User, Buttons */}
+        <div className="flex items-center gap-2 flex-wrap justify-end">
           <VeltNotificationsTool />
+
+          {/* User Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -136,7 +136,9 @@ export const Header: React.FC<HeaderProps> = ({
                     {user?.displayName}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-sm">{user?.displayName}</span>
+                <span className="text-sm truncate max-w-[100px]">
+                  {user?.displayName}
+                </span>
                 <ChevronDown size={14} />
               </Button>
             </DropdownMenuTrigger>
@@ -180,21 +182,19 @@ export const Header: React.FC<HeaderProps> = ({
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center space-x-2"
-          >
+          {/* Save Button */}
+          <Button variant="outline" size="sm" className="space-x-2 h-8">
             <Save size={16} />
-            <span>Save</span>
+            <span className="hidden sm:inline">Save</span>
           </Button>
 
+          {/* Send Button */}
           <Button
             size="sm"
-            className="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700"
+            className="flex items-center space-x-2 h-8 bg-indigo-600 hover:bg-indigo-700"
           >
             <Send size={16} />
-            <span>Send</span>
+            <span className="hidden sm:inline">Send</span>
           </Button>
         </div>
       </div>

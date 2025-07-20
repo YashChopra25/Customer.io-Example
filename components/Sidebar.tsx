@@ -118,14 +118,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-gray-900">Content</h2>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="h-8 w-8 p-0"
-          >
-            <X size={16} />
-          </Button>
         </div>
       </div>
 
@@ -149,7 +141,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900">
+                      <p className="text-xs md:text-sm font-medium text-gray-900">
                         {item.name}
                       </p>
                       {/* <p className="text-xs text-gray-500 truncate">{item.description}</p> */}
