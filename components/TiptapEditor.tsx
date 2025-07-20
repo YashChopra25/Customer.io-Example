@@ -34,7 +34,7 @@ const TiptapEditor = () => {
         </p>
       </div>
       <div>
-        <p>You’re receiving this email because you signed up at our website.</p>
+        <p>You’re receiving this email because you signed up on our website.</p>
         <p>Unsubscribe at any time by clicking <a href="#">here</a>.</p>
         <br>
         <p>Cheers,<br>The Team</p>

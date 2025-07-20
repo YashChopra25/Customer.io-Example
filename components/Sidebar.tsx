@@ -16,6 +16,8 @@ import {
   ChevronDown,
   ChevronRight,
   Plus,
+  LayoutPanelLeft,
+  Database,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -42,19 +44,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
     );
   };
 
-  const contentBlocks = [
-    { name: "Text", icon: Type, description: "Add text content" },
-    { name: "Image", icon: Image, description: "Insert an image" },
-    { name: "Button", icon: Square, description: "Call-to-action button" },
-    { name: "Divider", icon: Layout, description: "Horizontal line" },
-    { name: "Social", icon: Smile, description: "Social media links" },
-    { name: "Calendar", icon: Calendar, description: "Event information" },
-  ];
+  const DateIntegration = ["Data Index", "Integrations", "Imports", "Exports"];
 
-  const layoutBlocks = [
-    { name: "Container", icon: Layout, description: "Content container" },
-    { name: "Columns", icon: Layout, description: "Multi-column layout" },
-    { name: "Spacer", icon: Layout, description: "Add spacing" },
+  const Content = [
+    "Assets",
+    "Email Layouts",
+    "Snippets",
+    "Collections (Premium)",
   ];
 
   const menuItems = [
@@ -71,13 +67,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { name: "Activity Logs", icon: "📈" },
   ];
 
-  const renderSection = (title: string, items: any[], sectionKey: string) => (
+  const renderSection = (
+    title: string,
+    items: any[],
+    sectionKey: string,
+    icon: React.ReactNode
+  ) => (
     <div className="mb-4">
       <button
         onClick={() => toggleSection(sectionKey)}
         className="flex items-center justify-between w-full p-2 text-left hover:bg-gray-50 rounded-lg"
       >
-        <span className="font-medium text-sm text-gray-900">{title}</span>
+        <div className="space-x-2 flex items-center justify-start">
+          <span className="text-gray-600 group-hover:text-blue-600">
+            {icon}
+          </span>
+
+          <span className="font-medium text-sm text-gray-900">{title}</span>
+        </div>
+
         {expandedSections.includes(sectionKey) ? (
           <ChevronDown size={16} />
         ) : (
@@ -88,24 +96,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {expandedSections.includes(sectionKey) && (
         <div className="mt-2 space-y-1">
           {items.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => onInsertBlock(item.name.toLowerCase())}
+            <div
+              key={item}
+              onClick={() => onInsertBlock(item.toLowerCase())}
               className="flex items-center space-x-3 w-full p-2 text-left hover:bg-blue-50 rounded-lg group"
             >
-              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-blue-100">
-                <item.icon
-                  size={16}
-                  className="text-gray-600 group-hover:text-blue-600"
-                />
-              </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900">{item.name}</p>
-                <p className="text-xs text-gray-500 truncate">
-                  {item.description}
-                </p>
+                <p className="ps-10 text-sm text-gray-900/70">{item}</p>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       )}
@@ -165,12 +164,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <Separator />
 
           {/* Content Blocks */}
-          {renderSection("Content Blocks", contentBlocks, "content")}
+          {renderSection(
+            "Data & Integrations",
+            DateIntegration,
+            "content",
+            <Database size={19} />
+          )}
 
           <Separator />
 
           {/* Layout Blocks */}
-          {renderSection("Layout Blocks", layoutBlocks, "layout")}
+          {renderSection(
+            "Content",
+            Content,
+            "layout",
+            <LayoutPanelLeft size={19} />
+          )}
 
           <Separator />
         </div>
