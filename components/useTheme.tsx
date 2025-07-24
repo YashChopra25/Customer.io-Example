@@ -64,9 +64,9 @@ export const ThemeToggleButton: React.FC = () => {
       className="p-2 hover:bg-gray-200 dark:bg-gray-700/30 hover:dark:bg-gray-700 rounded-full transition-all"
     >
       {theme === 'light' ? (
-        <Moon className="text-gray-800 dark:text-gray-200" />
+        <Moon className="text-[#8c8c8c] dark:text-gray-200" size={20}/>
       ) : (
-        <Sun className="text-gray-800 dark:text-gray-200" />
+        <Sun className="text-[#8c8c8c] dark:text-gray-200" size={20}/>
       )}
     </button>
   );
