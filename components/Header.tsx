@@ -14,7 +14,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { VeltNotificationsTool } from "@veltdev/react";
+import {
+  VeltCommentsSidebar,
+  VeltCommentTool,
+  VeltNotificationsTool,
+  VeltSidebarButton,
+} from "@veltdev/react";
 
 interface HeaderProps {
   emailData: EmailData;
@@ -75,7 +80,7 @@ export const Header: React.FC<HeaderProps> = ({
 
     client.identify(veltUser);
   }, [client, user]);
-  const theme=useTheme()
+  const theme = useTheme();
   return (
     <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 dark:bg-[#25293c] dark:border-white/40">
       <div className="flex flex-wrap items-center justify-between gap-y-4">
@@ -106,7 +111,9 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
 
             <div className="flex flex-col space-y-1">
-              <label className="text-xs font-medium text-gray-700 dark:text-white/70">From</label>
+              <label className="text-xs font-medium text-gray-700 dark:text-white/70">
+                From
+              </label>
               <Input
                 value={emailData.from}
                 onChange={(e) => updateEmailData({ from: e.target.value })}
@@ -118,9 +125,9 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Right side - User, Buttons */}
         <div className="flex items-center gap-2 flex-wrap justify-end">
-          <VeltNotificationsTool darkMode={theme.theme==="dark"}/>
+          <VeltNotificationsTool darkMode={theme.theme === "dark"} />
           {/* User Dropdown */}
-          <ThemeToggleButton/>
+          <ThemeToggleButton />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -145,7 +152,7 @@ export const Header: React.FC<HeaderProps> = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-64 dark:bg-[#2f3349]">
               <DropdownMenuLabel>Select User</DropdownMenuLabel>
-              <DropdownMenuSeparator className="dark:bg-white/40"/>
+              <DropdownMenuSeparator className="dark:bg-white/40" />
               {predefinedUsers.map((Currentuser) => (
                 <DropdownMenuItem
                   key={Currentuser.uid}
@@ -168,7 +175,9 @@ export const Header: React.FC<HeaderProps> = ({
                     <div className="text-xs text-gray-500 dark:text-white/60">
                       {Currentuser.email}
                     </div>
-                    <div className="text-xs text-gray-400 dark:text-white/50">User</div>
+                    <div className="text-xs text-gray-400 dark:text-white/50">
+                      User
+                    </div>
                   </div>
                   {user?.uid === Currentuser.uid && (
                     <div className="w-2 h-2 bg-blue-600 rounded-full" />
@@ -184,7 +193,11 @@ export const Header: React.FC<HeaderProps> = ({
           </DropdownMenu>
 
           {/* Save Button */}
-          <Button variant="outline" size="sm" className="space-x-2 h-8 dark:bg-[#2f3349] dark:border dark:border-white/30">
+          <Button
+            variant="outline"
+            size="sm"
+            className="space-x-2 h-8 dark:bg-[#2f3349] dark:border dark:border-white/30"
+          >
             <Save size={16} />
             <span className="hidden sm:inline">Save</span>
           </Button>
@@ -194,9 +207,12 @@ export const Header: React.FC<HeaderProps> = ({
             size="sm"
             className="flex items-center space-x-2 h-8 bg-indigo-600 hover:bg-indigo-700 "
           >
-            <Send size={16} className="dark:text-white"/>
+            <Send size={16} className="dark:text-white" />
             <span className="hidden sm:inline dark:text-white">Send</span>
           </Button>
+
+          <VeltSidebarButton />
+          <VeltCommentsSidebar/>
         </div>
       </div>
     </div>
