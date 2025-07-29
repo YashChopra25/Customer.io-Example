@@ -35,11 +35,11 @@ export const EditorArea: React.FC<EditorAreaProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-5 p-6 space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-5 p-3 space-y-3 lg:p-6 lg:space-y-6">
         <div className="w-full lg:max-w-[70vw] col-span-2 mx-auto">
           <TiptapEditor />
         </div>
-        <main className="space-y-6">
+        <main className="space-y-3 lg:space-y-6">
           {/* Journey Section */}
           <InfoCard title="Journey">
             <TextRow label="Started" value="17 minutes ago" />

@@ -2,11 +2,11 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { Toolbar } from "./Toolbar";
-import { Sidebar } from "./Sidebar";
 import { EditorArea } from "./EditorArea";
-import { Header } from "./Header";
 import { cn } from "@/lib/utils";
 import { useSetDocument } from "@veltdev/react";
+import { Header } from "./Header";
+import { Sidebar } from "./Sidebar";
 
 export interface EmailData {
   subject: string;
@@ -29,8 +29,7 @@ export const EmailComposer: React.FC = () => {
   const updateEmailData = (updates: Partial<EmailData>) => {
     setEmailData((prev) => ({ ...prev, ...updates }));
   };
-  // useSetDocument("yash-customer.io-presernt", { documentName: "salary sheet" });
-    useSetDocument("sheet-1", { documentName: "salary sheet" });
+  useSetDocument("sheet-1", { documentName: "customer.io" });
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)"); // lg breakpoint
 
@@ -46,31 +45,19 @@ export const EmailComposer: React.FC = () => {
     };
   }, []);
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-[#25293c]">
-      {/* Sidebar */}
-      <div
-        className={cn(
-          "max-h-screen overflow-y-scroll transition-all duration-300 ease-in-out bg-white border-r border-gray-200 no-scrollbar dark:bg-[#25293c]",
-          isSidebarOpen ? "w-80" : "w-0 overflow-hidden"
-        )}
-      >
-        <Sidebar
-          isOpen={isSidebarOpen}
-          onClose={() => setIsSidebarOpen(false)}
-          onInsertBlock={(blockType) => {
-            console.log("Insert block:", blockType);
-          }}
-        />
-      </div>
+    <div className="flex bg-gray-50 dark:bg-[#25293c]">
+      <Sidebar
+        onInsertBlock={(blockType) => {
+          console.log("Insert block:", blockType);
+        }}
+      />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col bg-white dark:bg-[#25293c]">
+      <div className="flex-1 max-h-screen overflow-scroll flex flex-col bg-white dark:bg-[#25293c]">
         {/* Header */}
         <Header
           emailData={emailData}
           updateEmailData={updateEmailData}
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
         />
         {/* Toolbar */}
         <Toolbar
@@ -78,10 +65,7 @@ export const EmailComposer: React.FC = () => {
             console.log("Apply formatting:", format);
           }}
         />
-        <EditorArea
-          emailData={emailData}
-          updateEmailData={updateEmailData}
-        />
+        <EditorArea emailData={emailData} updateEmailData={updateEmailData} />
       </div>
     </div>
   );

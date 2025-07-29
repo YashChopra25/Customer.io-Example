@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Save, Menu, X, User, ChevronDown } from "lucide-react";
+import { Send, Save, Menu, User, ChevronDown } from "lucide-react";
 import { EmailData } from "./EmailComposer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   VeltCommentsSidebar,
-  VeltCommentTool,
   VeltNotificationsTool,
   VeltSidebarButton,
 } from "@veltdev/react";
@@ -24,8 +23,7 @@ import {
 interface HeaderProps {
   emailData: EmailData;
   updateEmailData: (updates: Partial<EmailData>) => void;
-  isSidebarOpen: boolean;
-  setIsSidebarOpen: (open: boolean) => void;
+
 }
 
 import { useVeltClient } from "@veltdev/react";
@@ -35,8 +33,6 @@ import useTheme, { ThemeToggleButton } from "./useTheme";
 export const Header: React.FC<HeaderProps> = ({
   emailData,
   updateEmailData,
-  isSidebarOpen,
-  setIsSidebarOpen,
 }) => {
   const { user, setUser } = useUserStore();
   const { client } = useVeltClient();
@@ -82,22 +78,12 @@ export const Header: React.FC<HeaderProps> = ({
   }, [client, user]);
   const theme = useTheme();
   return (
-    <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 dark:bg-[#25293c] dark:border-white/40">
+    <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 dark:bg-[#25293c] dark:border-white/40 relative">
       <div className="flex flex-wrap items-center justify-between gap-y-4">
         {/* Left side - Toggle, Subject, From */}
-        <div className="flex flex-wrap items-center gap-4">
-          {/* Sidebar Toggle */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-gray-600 hover:text-gray-900 lg:hidden"
-          >
-            {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
-          </Button>
-
+        <div className="hidden lg:flex flex-wrap items-center gap-4">
           {/* Subject and From fields */}
-          <div className="hidden lg:flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex flex-col space-y-1">
               <label className="text-xs font-medium text-gray-700 dark:text-white/70">
                 Subject
@@ -124,7 +110,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Right side - User, Buttons */}
-        <div className="flex items-center gap-2 flex-wrap justify-end">
+        <div className="flex items-center gap-2 justify-end flex-wrap">
           <VeltNotificationsTool darkMode={theme.theme === "dark"} />
           {/* User Dropdown */}
           <ThemeToggleButton />
@@ -191,7 +177,6 @@ export const Header: React.FC<HeaderProps> = ({
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-
           {/* Save Button */}
           <Button
             variant="outline"
@@ -201,7 +186,6 @@ export const Header: React.FC<HeaderProps> = ({
             <Save size={16} />
             <span className="hidden sm:inline">Save</span>
           </Button>
-
           {/* Send Button */}
           <Button
             size="sm"
@@ -210,9 +194,8 @@ export const Header: React.FC<HeaderProps> = ({
             <Send size={16} className="dark:text-white" />
             <span className="hidden sm:inline dark:text-white">Send</span>
           </Button>
-
           <VeltSidebarButton />
-          <VeltCommentsSidebar/>
+          <VeltCommentsSidebar />
         </div>
       </div>
     </div>
