@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -35,7 +35,25 @@ export const Sidebar: React.FC<SidebarProps> = ({ onInsertBlock }) => {
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      // Collapse sidebar for mobile devices (screens < 768px)
+      if (window.innerWidth < 768) {
+        setIsCollapsed(true);
+      } else {
+        setIsCollapsed(false);
+      }
+    };
 
+    // Run on mount
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const DateIntegration = ["Data Index", "Integrations", "Imports", "Exports"];
 
   const Content = [
@@ -121,13 +139,21 @@ export const Sidebar: React.FC<SidebarProps> = ({ onInsertBlock }) => {
         isCollapsed ? "w-16" : "w-50 lg:w-64"
       }`}
     >
-      <div className={`border-b border-gray-200 dark:border-white/40 flex items-center justify-between ${!isCollapsed?'p-4':'p-2'}`}>
-          <h2 className={`font-semibold text-gray-900 dark:text-white ${isCollapsed && 'text-xs'}`}>
-            Content
-          </h2>
+      <div
+        className={`border-b border-gray-200 dark:border-white/40 flex items-center justify-between ${
+          !isCollapsed ? "p-4" : "p-2"
+        }`}
+      >
+        <h2
+          className={`font-semibold text-gray-900 dark:text-white ${
+            isCollapsed && "text-xs"
+          }`}
+        >
+          Content
+        </h2>
       </div>
 
-      <div className={`flex-1 ${!isCollapsed?'p-4':'p-2'}`}>
+      <div className={`flex-1 ${!isCollapsed ? "p-4" : "p-2"}`}>
         <div className="space-y-6">
           {/* Templates */}
           <div>
@@ -144,7 +170,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ onInsertBlock }) => {
                     className="flex items-center space-x-3 w-full p-2 text-left hover:bg-blue-50 rounded-lg group hover:dark:!text-black"
                     title={isCollapsed ? item.name : ""}
                   >
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${!isCollapsed && 'bg-gray-100 group-hover:bg-blue-100 hover:dark:!text-black'}`}>
+                    <div
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                        !isCollapsed &&
+                        "bg-gray-100 group-hover:bg-blue-100 hover:dark:!text-black"
+                      }`}
+                    >
                       <span className="text-gray-600 group-hover:text-text-black">
                         {item.icon}
                       </span>
@@ -194,7 +225,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ onInsertBlock }) => {
           variant="ghost"
           size="sm"
           onClick={toggleSidebar}
-          className={`text-gray-600 hover:text-gray-900 ${!isCollapsed?'float-right mr-3':'ml-2'}`}
+          className={`text-gray-600 hover:text-gray-900 ${
+            !isCollapsed ? "float-right mr-3" : "ml-2"
+          }`}
         >
           {isCollapsed ? (
             <ChevronsRight size={20} />
