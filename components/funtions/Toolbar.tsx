@@ -83,10 +83,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({ onFormatting }) => {
                   variant="ghost"
                   size="sm"
                   onClick={() => onFormatting(item.action)}
-                  className="h-8 w-8 p-0 hover:bg-gray-100 "
+                  className="h-8 w-8 p-0 hover:bg-gray-100 group"
                   title={item.tooltip}
                 >
-                  <item.icon size={16} className='hover:dark:text-black'/>
+                  <item.icon size={16} className='hover:dark:text-black group-hover:dark:text-black'/>
                 </Button>
               ))}
             </div>

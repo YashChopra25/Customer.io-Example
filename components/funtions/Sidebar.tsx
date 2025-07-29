@@ -86,10 +86,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ onInsertBlock }) => {
     <div className="!m-0 !my-4 dark:bg-[#25293c]">
       <button
         onClick={() => toggleSection(sectionKey)}
-        className="flex items-center justify-between w-full p-2 text-left hover:bg-gray-50 rounded-lg group"
+        className={`flex items-center  w-full p-2 text-left hover:bg-gray-50 rounded-lg group ${
+          !isCollapsed ? "justify-between" : "justify-center"
+        }`}
       >
         <div className="space-x-2 flex items-center justify-start">
-          <span className="text-gray-600 group-hover:text-text-black">
+          <span className="text-gray-600 group-hover:text-black dark:text-white/50">
             {icon}
           </span>
           {!isCollapsed && (
@@ -135,7 +137,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onInsertBlock }) => {
 
   return (
     <div
-      className={`h-full bg-white border-r border-gray-200 dark:bg-[#25293c] transition-all duration-300 max-h-screen overflow-scroll no-scrollbar ${
+      className={`h-full bg-white border-r border-gray-200 dark:bg-[#25293c] transition-all duration-300 max-h-screen overflow-scroll no-scrollbar dark:border-white/50 ${
         isCollapsed ? "w-16" : "w-50 lg:w-64"
       }`}
     >
@@ -225,7 +227,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onInsertBlock }) => {
           variant="ghost"
           size="sm"
           onClick={toggleSidebar}
-          className={`text-gray-600 hover:text-gray-900 ${
+          className={`text-gray-600 hover:text-gray-900 dark:text-white/30 dark:hover:bg-white/80 dark:hover:text-black dark:text-white/50 ${
             !isCollapsed ? "float-right mr-3" : "ml-2"
           }`}
         >
