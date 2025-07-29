@@ -88,7 +88,7 @@ const TiptapEditor = () => {
       {/* Editor Content */}
       <EditorContent
         editor={editor}
-        className="w-full min-h-56 p-4 border-2 border-dashed border-white/30 rounded-lg focus-within:border-blue-500 focus-within:bg-blue-50/50 dark:border-[1px] dark:focus-within:bg-[#2f3349] dark:focus-within:border-white text-white"
+        className="w-full min-h-56 p-4 border-2 border-dashed border-black/30 rounded-lg focus-within:border-blue-500 focus-within:bg-blue-50/50 dark:border-[1px] dark:focus-within:bg-[#2f3349] dark:focus-within:border-white text-white"
       />
     </div>
   );
