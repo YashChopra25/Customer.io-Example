@@ -227,7 +227,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onInsertBlock }) => {
           variant="ghost"
           size="sm"
           onClick={toggleSidebar}
-          className={`text-gray-600 hover:text-gray-900 dark:text-white/30 dark:hover:bg-white/80 dark:hover:text-black dark:text-white/50 ${
+          className={`text-gray-600 hover:text-gray-900 dark:hover:bg-white/80 dark:hover:text-black dark:text-white/50 ${
             !isCollapsed ? "float-right mr-3" : "ml-2"
           }`}
         >
